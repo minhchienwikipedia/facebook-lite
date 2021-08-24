@@ -1,4 +1,7 @@
 ### Facebook Lite - Chrome Extension
+Make your Facebook Cleaner
+
+<img src="./demo.png" width="2878" height="1490" />
 
 ### Feature
 * Remove Ads
