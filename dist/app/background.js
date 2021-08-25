@@ -74,7 +74,6 @@
   });
 
   chrome.runtime.onMessage.addListener((msg, sender, response) => {
-    console.log(msg);
     switch (msg.type) {
       case "init":
         response(tabStorage[msg.tabId]);

@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Divider, Layout, Menu, message } from "antd";
+import { Divider, Layout, Menu, message, Typography } from "antd";
 import { dispatch } from "./utils/functions";
 import Icon, { ClearOutlined } from "@ant-design/icons";
 
 function App() {
   const [info, setInfo] = useState({});
   useEffect(() => {
-    dispatch("init", (res) => {
-      setInfo(res);
-    });
+    // setTimeout(() => {
+    //   dispatch("init", (res) => {
+    //     setInfo(res);
+    //   });
+    // }, 10000);
     return () => {};
   }, []);
 
@@ -70,30 +72,45 @@ function App() {
     </svg>
   );
 
+  const onClickLink = () => {
+    window.open("https://github.com/minhchienwikipedia");
+  };
+
   const CleanIcon = (props) => <Icon component={CleanSvg} {...props} />;
 
   return (
-    <div style={{ width: 400 }} className="App">
+    <div style={{ width: 350 }} className="App">
       <header className="App-header">
         <Layout>
-          <Layout.Header style={{ color: "white" }}>
+          <Layout.Header style={{ color: "white", fontWeight: "bold" }}>
             Facebook Lite
           </Layout.Header>
           <Layout.Content style={{ flexDirection: "column" }}>
-            <Divider style={{ padding: 0 }} />
             <Menu mode="inline" theme="dark">
-              <Divider style={{ padding: 0 }} />
+              <Divider style={{ margin: 0 }} />
               <Menu.Item key="2" onClick={onClearFB} icon={<CleanIcon />}>
                 Clear FB
               </Menu.Item>
-              <Divider style={{ padding: 0 }} />
+              <Divider style={{ margin: 0 }} />
               <Menu.Item key="3" onClick={onRemoveAds} icon={<ClearOutlined />}>
                 Remove Ads
               </Menu.Item>
             </Menu>
           </Layout.Content>
-          <Layout.Footer style={{ height: 80 }}>
-            Facebook Lite ©2020 Created by Minhchienwikipedia
+          <Layout.Footer
+            style={{
+              paddingTop: 24,
+              paddingBottom: 24,
+              fontSize: 12,
+              width: 350,
+            }}
+          >
+            <Typography.Text>
+              {"©2020 "}
+              <Typography.Link onClick={onClickLink}>
+                Minhchienwikipedia
+              </Typography.Link>
+            </Typography.Text>
           </Layout.Footer>
         </Layout>
       </header>
