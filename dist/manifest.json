@@ -28,8 +28,7 @@
   "content_scripts": [
     {
       "matches": [ 
-        "https://*/",
-        "http://*/"
+        "https://www.facebook.com/*"
       ],
       "js": [
         "app/clearFB.js",
