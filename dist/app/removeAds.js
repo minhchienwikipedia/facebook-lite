@@ -52,7 +52,12 @@
       });
       feeds.forEach((feed, i) => {
         try {
-          if (doHack(feed)) {
+          if (
+            doHack(feed) ||
+            feed.innerHTML.indexOf("Gợi ý cho bạn") !== -1 ||
+            feed.innerHTML.indexOf("Suggested for You") !== -1 ||
+            feed.innerHTML.indexOf("Suggested for you") !== -1
+          ) {
             // console.log('killed', feed.querySelector('h4 span'));
             feed.style.display = "none";
           }

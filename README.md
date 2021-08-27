@@ -4,7 +4,8 @@ Make your Facebook Cleaner
 <img src="./demo.png" width="719.5" height="372.5" />
 
 ### Feature
-* Remove Ads
+* Remove Ads posts
+* Remove Suggestion posts by Facebook
 * Clean Facebook (Remove element unused - make Facebook faster, no lagging anymore)
 
 ### How to use?

@@ -52,8 +52,12 @@
       });
       feeds.forEach((feed, i) => {
         try {
-          if (doHack(feed)) {
-            // console.log('killed', feed.querySelector('h4 span'));
+          if (
+            doHack(feed) ||
+            feed.innerHTML.indexOf("Gợi ý cho bạn") !== -1 ||
+            feed.innerHTML.indexOf("Suggested for You") !== -1 ||
+            feed.innerHTML.indexOf("Suggested for you") !== -1
+          ) {
             feed.style.display = "none";
           }
         } catch (e) {}
@@ -76,7 +80,6 @@
     };
 
     const runAdsKiller = () => {
-      const throttleKill = throttle(trimAdsForRoot, 50);
       trimAdsForRoot();
       window.addEventListener("scroll", trimAdsForRoot);
       window.addEventListener("resize", trimAdsForRoot);
