@@ -107,9 +107,9 @@ function App() {
             }}
           >
             <Typography.Text>
-              {"©2020 "}
+              {"©2021 "}
               <Typography.Link onClick={onClickLink}>
-                Minhchienwikipedia
+                minhchienwikipedia
               </Typography.Link>
             </Typography.Text>
           </Layout.Footer>

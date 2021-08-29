@@ -4,6 +4,10 @@ function clearFB() {
   document
     .querySelectorAll(".j83agx80.cbu4d94t.buofh1pr")
     .forEach(function (a) {
+      // Notification | Chat
+      if (a.className === ".j83agx80.cbu4d94t.buofh1pr.l9j0dhe7") {
+        return;
+      }
       a.remove();
     });
 }
