@@ -19,7 +19,8 @@
     "http://*/",
     "declarativeContent",
     "webNavigation",
-    "webRequest"
+    "webRequest",
+    "storage"
   ],
   "background": {
     "scripts": ["app/background.js"],
@@ -31,8 +32,7 @@
         "https://www.facebook.com/*"
       ],
       "js": [
-        "app/clearFB.js",
-        "app/removeAds.js"
+        "app/content.js"
       ]
     }
   ]
