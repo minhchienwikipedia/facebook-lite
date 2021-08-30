@@ -2,12 +2,10 @@
 
 function clearFB() {
   document
-    .querySelectorAll(".j83agx80.cbu4d94t.buofh1pr")
+    .querySelectorAll(
+      ".rq0escxv.l9j0dhe7.du4w35lb.j83agx80.cbu4d94t.qowsmv63.dp1hu0rb"
+    )
     .forEach(function (a) {
-      // Notification | Chat
-      if (a.className === ".j83agx80.cbu4d94t.buofh1pr.l9j0dhe7") {
-        return;
-      }
       a.remove();
     });
 }
