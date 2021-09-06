@@ -8,10 +8,11 @@ Make your Facebook Cleaner
 * Remove Ads posts
 * Remove Suggestion posts by Facebook
 * Clean Facebook (Remove element unused - make Facebook faster, no lagging anymore)
+* Change Posts width
 
 ### How to use?
 
-1. Download & Unzip [Facebook Lite](https://github.com/minhchienwikipedia/facebook-lite/releases/)
+1. Download & Unzip [facebook-lite.zip](https://github.com/minhchienwikipedia/facebook-lite/releases/)
 2. Open Chrome Extension: `chrome://extensions`
 3. Chose `Load Unpacked` chose unzip folder of Facebook Lite
 4. Open [Facebook](https://www.facebook.com/) to check how it work!
