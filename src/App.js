@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
-import { Col, Divider, Layout, Row, Switch, Typography } from "antd";
+import { Col, Divider, Input, Layout, Row, Switch, Typography } from "antd";
 import { isEqual } from "lodash";
 
 function App() {
@@ -37,11 +37,14 @@ function App() {
     updateStorage(newStorage);
   };
 
+  const onChangeSize = (e) => {
+    const newStorage = { ...storage, postSize: e.target.value };
+    updateStorage(newStorage);
+  };
+
   const onClickLink = () => {
     window.open("https://github.com/minhchienwikipedia");
   };
-
-  console.log(initStorage.current, storage);
 
   return (
     <div style={{ width: 350 }} className="App">
@@ -59,11 +62,7 @@ function App() {
                 <Typography.Text>Clear FB</Typography.Text>
               </Col>
               <Col span={4}>
-                <Switch
-                  defaultChecked
-                  checked={storage.clearFB}
-                  onChange={onChangeClearFB}
-                />
+                <Switch checked={storage.clearFB} onChange={onChangeClearFB} />
               </Col>
             </Row>
             <Row style={{ padding: 12 }} align="middle" justify="space-between">
@@ -72,7 +71,6 @@ function App() {
               </Col>
               <Col span={4}>
                 <Switch
-                  defaultChecked
                   checked={storage.removeAds}
                   onChange={onChangeRemoveAds}
                 />
@@ -84,10 +82,17 @@ function App() {
               </Col>
               <Col span={4}>
                 <Switch
-                  defaultChecked
                   checked={storage.removeSuggestionPosts}
                   onChange={onChangeRemoveSuggestionPosts}
                 />
+              </Col>
+            </Row>
+            <Row style={{ padding: 12 }} align="middle" justify="space-between">
+              <Col span={12}>
+                <Typography.Text>Post width</Typography.Text>
+              </Col>
+              <Col span={12}>
+                <Input value={storage.postSize} onChange={onChangeSize} />
               </Col>
             </Row>
             {!isEqual(initStorage.current, storage) ? (

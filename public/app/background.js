@@ -14,10 +14,11 @@
             chrome.tabs.sendMessage(tabId, {
               type: "activeFacebookLite",
               currentUrl,
-              facebookLiteStorage: data.facebookLite || {
+              facebookLiteStorage: data?.facebookLite || {
                 clearFB: true,
                 removeAds: true,
                 removeSuggestionPosts: true,
+                postSize: null,
               },
             });
           }
