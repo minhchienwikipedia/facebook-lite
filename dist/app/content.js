@@ -59,7 +59,9 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
     feeds.forEach((feed, i) => {
       try {
         if (
-          (doHack(feed) && enableRemoveAds) ||
+          ((doHack(feed) ||
+            feed.innerText.replace(/-/g, "").indexOf("Sponsored") !== -1) &&
+            enableRemoveAds) ||
           ((feed.innerHTML.indexOf("Gợi ý cho bạn") !== -1 ||
             feed.innerHTML.indexOf("Suggested for You") !== -1 ||
             feed.innerHTML.indexOf("Suggested for you") !== -1) &&
