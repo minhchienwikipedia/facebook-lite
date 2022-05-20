@@ -53,9 +53,7 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
   };
 
   const trimAds = () => {
-    const feeds = [].slice.call(rootEl.children || []).filter((child) => {
-      return child.hasAttribute("data-pagelet");
-    });
+    const feeds = document.querySelectorAll('[role="article"]');
     feeds.forEach((feed, i) => {
       try {
         if (

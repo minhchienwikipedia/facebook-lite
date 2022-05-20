@@ -53,14 +53,12 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
   };
 
   const trimAds = () => {
-    const feeds = [].slice.call(rootEl.children || []).filter((child) => {
-      return child.hasAttribute("data-pagelet");
-    });
+    const feeds = document.querySelectorAll('[role="article"]');
     feeds.forEach((feed, i) => {
       try {
         if (
           ((doHack(feed) ||
-            feed.innerText.replace(/-/g, "").indexOf("Sponsored") !== -1) &&
+            feed.innerText.replace(/-/g, "").indexOf("Sponsored") !== -1) && // Add more your language translation right here!
             enableRemoveAds) ||
           ((feed.innerHTML.indexOf("Gợi ý cho bạn") !== -1 ||
             feed.innerHTML.indexOf("Suggested for You") !== -1 ||
