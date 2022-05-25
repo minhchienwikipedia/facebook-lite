@@ -100,20 +100,32 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
   init();
 }
 
+const changeStoresSize = (size) => {
+  // Change stores width
+  document.getElementsByClassName(
+    "gs1a9yip j83agx80 btwxx1t3 owycx6da jifvfom9 dlv3wnog rl04r1d5 ni8dbmo4 stjgntxs jbae33se cxgpxx05 l9j0dhe7"
+  )[0].style.width = `${size}px`;
+  // Arrow icon position
+  document.getElementsByClassName(
+    "f2thv7nb la811eo6 pmk7jnqg fpf4h9qb gsapk3bl nr3idzxk cur7e4n5 ocebsr1h"
+  )[0].style.left = `${size - 30}px`;
+};
+
 const changeSize = (size) => {
   let post = null;
-  const els = document.getElementsByClassName("j83agx80 btwxx1t3 taijpn5t");
-  const stores = document.getElementsByClassName(
-    "d2edcug0 e3xpq0al v8c10jal ejjq64ki"
-  )[0];
-
+  const mainClassName = "rq0escxv l9j0dhe7 du4w35lb";
+  const feedMain = "d2edcug0 oh7imozk abvwweq7 ejjq64ki";
+  const feedMainClass = "." + feedMain.split(" ").join(".");
+  const els = document.getElementsByClassName(mainClassName);
+  const stores = document.getElementsByClassName(feedMain)[0];
+  changeStoresSize(size);
   Array.prototype.forEach.call(els, function (el) {
     // Do stuff here
 
-    if (el.className === "j83agx80 btwxx1t3 taijpn5t") {
+    if (el.className === mainClassName) {
       post = el;
-      var css = `.d2edcug0.oh7imozk.abvwweq7.ejjq64ki {width: ${size}px;}
-      .d2edcug0.e3xpq0al.v8c10jal.ejjq64ki {width: ${size}px;}
+      var css = `${feedMainClass} {width: ${size}px;}
+      ${feedMainClass} {width: ${size}px;}
       `,
         head = post;
       const style = document.createElement("style");
