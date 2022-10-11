@@ -106,7 +106,7 @@ function handleResponse(response) {
         changeSize(postSize);
       }
     }
-  }, 1000);
+  }, 300);
   removeAds(facebookLiteStorage.removeAds, removeSuggestionPosts);
 }
 
