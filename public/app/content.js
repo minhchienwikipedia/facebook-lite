@@ -37,7 +37,7 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
       const svgs = item.getElementsByTagName("svg");
       for (let j = 0; j < svgs.length; j++) {
         const element = svgs[j];
-        if (getStyle(element, "width") === "61.0625px" && enableRemoveAds) {
+        if (getStyle(element, "width").indexOf("61.") >= 0 && enableRemoveAds) {
           item.remove();
         }
       }
