@@ -1,7 +1,7 @@
 {
   "name": "Facebook Lite",
   "version": "1.0.2",
-  "manifest_version": 3,
+  "manifest_version": 2,
   "description": "Facebook Lite",
   "icons": {
     "512": "logo512.png"
