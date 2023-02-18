@@ -6,7 +6,6 @@ function clearFB() {
 }
 
 function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
-  let rootEl = null;
   let intervalId = null;
   let prevUrl = null;
 
@@ -19,59 +18,33 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
     }, 50);
   };
 
-  const doHack = (feed) => {
-    // 1. Find this unique block inside the feed
-    const spanWithId = feed.querySelector("span[id]");
-
-    if (!spanWithId) return;
-
-    const spanChildren = spanWithId.children;
-
-    // 2. Check if the second child of spanWithId is not a DIV element
-    if (spanChildren && spanChildren.length) {
-      if (spanChildren[1]) {
-        // if(spanChildren[1].nodeName !== 'SPAN') console.log(spanChildren[1].nodeName);
-
-        return spanChildren[1].nodeName !== "SPAN";
-      }
-    }
-  };
-
   const trimAds = () => {
-    const feeds = document.getElementsByClassName(
-      "g4tp4svg mfclru0v om3e55n1 p8bdhjjv"
+    const items = document.getElementsByClassName(
+      "x9f619 x1n2onr6 x1ja2u2z x2bj2ny x1qpq9i9 xdney7k xu5ydu1 xt3gfkd xh8yej3 x6ikm8r x10wlt62 xquyuld"
     );
 
-    for (let i = 0; i < feeds.length; i++) {
-      const feed = feeds[i];
-      try {
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const svgs = item.getElementsByTagName("svg");
+      for (let j = 0; j < svgs.length; j++) {
+        const element = svgs[j];
         if (
-          ((doHack(feed) ||
-            feed.innerText.replace(/-/g, "").indexOf("Sponsored") !== -1) && // Add more your language translation right here!
-            enableRemoveAds) ||
-          ((feed.innerHTML.indexOf("Gợi ý cho bạn") !== -1 ||
-            feed.innerHTML.indexOf("Suggested for You") !== -1 ||
-            feed.innerHTML.indexOf("Suggested for you") !== -1) &&
-            enableRemoveSuggestionPosts)
+          element.innerHTML ===
+          '<use xlink:href="#gid103" xmlns:xlink="http://www.w3.org/1999/xlink"></use>'
         ) {
-          feed.style.display = "none";
+          item.remove();
         }
-      } catch (e) {}
+      }
     }
   };
 
   const trimAdsForRoot = () => {
-    rootEl = null;
     if (intervalId) {
       clearInterval(intervalId);
     }
     intervalId = setInterval(() => {
-      if (!rootEl) {
-        rootEl = document.querySelector('[role="feed"]');
-      } else {
-        clearInterval(intervalId);
-        trimAds();
-      }
+      clearInterval(intervalId);
+      trimAds();
     }, 50);
   };
 
