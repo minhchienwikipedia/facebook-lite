@@ -2,7 +2,7 @@
 Make your Facebook Cleaner
 
 <img src="./demo.png" width="719.5" height="372.5" />
-<img src="./demo-2.png" width="359" height="306" />
+<img src="./demo-2.png" width="336" height="350" />
 
 ### Feature
 * Remove Ads posts
