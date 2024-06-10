@@ -1,6 +1,6 @@
 {
   "name": "facebook-lite",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "./script/build.sh",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && sh ./script/build.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

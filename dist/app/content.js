@@ -20,7 +20,7 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
 
   const trimAds = () => {
     const items = document.getElementsByClassName(
-      "x9f619 x1n2onr6 x1ja2u2z x2bj2ny x1qpq9i9 xdney7k xu5ydu1 xt3gfkd xh8yej3 x6ikm8r x10wlt62 xquyuld"
+      "x1yztbdb x1n2onr6 xh8yej3 x1ja2u2z"
     );
 
     for (let i = 0; i < items.length; i++) {
@@ -28,54 +28,16 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
       if (
         (item.innerHTML.indexOf("Gợi ý cho bạn") !== -1 ||
           item.innerHTML.indexOf("Suggested for You") !== -1 ||
+          item.innerText.indexOf("Send message") !== -1 ||
           item.innerHTML.indexOf("Suggested for you") !== -1) &&
         enableRemoveSuggestionPosts
       ) {
+        console.log("remove suggestion posts");
         item.remove();
         continue;
       }
-      const svgs = item.getElementsByTagName("svg");
-      for (let j = 0; j < svgs.length; j++) {
-        const element = svgs[j];
-        if (getStyle(element, "width").indexOf("61.") >= 0 && enableRemoveAds) {
-          item.remove();
-        }
-      }
     }
   };
-
-  function getStyle(el, styleProp) {
-    var value,
-      defaultView = (el.ownerDocument || document).defaultView;
-    // W3C standard way:
-    if (defaultView && defaultView.getComputedStyle) {
-      // sanitize property name to css notation
-      // (hypen separated words eg. font-Size)
-      styleProp = styleProp.replace(/([A-Z])/g, "-$1").toLowerCase();
-      return defaultView.getComputedStyle(el, null).getPropertyValue(styleProp);
-    } else if (el.currentStyle) {
-      // IE
-      // sanitize property name to camelCase
-      styleProp = styleProp.replace(/\-(\w)/g, function (str, letter) {
-        return letter.toUpperCase();
-      });
-      value = el.currentStyle[styleProp];
-      // convert other units to pixels on IE
-      if (/^\d+(em|pt|%|ex)?$/i.test(value)) {
-        return (function (value) {
-          var oldLeft = el.style.left,
-            oldRsLeft = el.runtimeStyle.left;
-          el.runtimeStyle.left = el.currentStyle.left;
-          el.style.left = value || 0;
-          value = el.style.pixelLeft + "px";
-          el.style.left = oldLeft;
-          el.runtimeStyle.left = oldRsLeft;
-          return value;
-        })(value);
-      }
-      return value;
-    }
-  }
 
   const trimAdsForRoot = () => {
     if (intervalId) {
@@ -102,34 +64,29 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
 }
 
 const changeSize = (size) => {
-  const mainClassName = "x193iq5w xvue9z xq1tmr x1ceravr";
-  document.getElementsByClassName(mainClassName)[0].style.width = `${size}px`;
-  document.getElementsByClassName(mainClassName)[1].style.width = `${size}px`;
+  // Change size content
+  document.getElementsByClassName(
+    "x193iq5w xvue9z xq1tmr x1ceravr"
+  )[0].style.width = `${size}px`;
+  // Change size header stories
+  document.getElementsByClassName(
+    "x193iq5w xgmub6v x1ceravr"
+  )[0].style.width = `${size}px`;
 };
 
-function handleResponse(response) {
-  const { facebookLiteStorage } = response || {};
+function handleResponse() {
+  chrome.storage.sync.get("facebookLite").then((response) => {
+    const { facebookLite } = response || {};
 
-  const { removeSuggestionPosts, postSize } = facebookLiteStorage || {};
-  setTimeout(() => {
-    if (facebookLiteStorage.clearFB) {
+    const { removeSuggestionPosts, postSize } = facebookLite || {};
+    if (facebookLite.clearFB) {
       clearFB();
       if (postSize) {
         changeSize(postSize);
       }
     }
-  }, 300);
-  removeAds(facebookLiteStorage.removeAds, removeSuggestionPosts);
+    removeAds(facebookLite.removeAds, removeSuggestionPosts);
+  });
 }
 
-chrome.runtime.onMessage.addListener((msg, sender, response) => {
-  switch (msg.type) {
-    case "activeFacebookLite": {
-      handleResponse(msg);
-      break;
-    }
-    default:
-      response("unknown request");
-      break;
-  }
-});
+handleResponse();

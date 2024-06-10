@@ -1,0 +1,60 @@
+[
+    {
+      "id": 1,
+      "priority": 1,
+      "action": {
+        "type": "block"
+      },
+      "condition": {
+        "urlFilter": "*://*.facebook.com/ads/*",
+        "resourceTypes": ["main_frame", "sub_frame", "script", "xmlhttprequest"]
+      }
+    },
+    {
+      "id": 2,
+      "priority": 1,
+      "action": {
+        "type": "block"
+      },
+      "condition": {
+        "urlFilter": "*://*.facebook.com/suggestions/*",
+        "resourceTypes": ["main_frame", "sub_frame", "script", "xmlhttprequest"]
+      }
+    },
+    {
+      "id": 3,
+      "priority": 1,
+      "action": {
+        "type": "modifyHeaders",
+        "requestHeaders": [
+          {
+            "header": "X-Example-Header",
+            "operation": "set",
+            "value": "ExampleValue"
+          }
+        ]
+      },
+      "condition": {
+        "urlFilter": "*://www.facebook.com/*",
+        "resourceTypes": ["xmlhttprequest"]
+      }
+    },
+    {
+      "id": 4,
+      "priority": 1,
+      "action": {
+        "type": "modifyHeaders",
+        "requestHeaders": [
+          {
+            "header": "Referer",
+            "operation": "remove"
+          }
+        ]
+      },
+      "condition": {
+        "urlFilter": "*://web.facebook.com/*",
+        "resourceTypes": ["xmlhttprequest"]
+      }
+    }
+  ]
+  
