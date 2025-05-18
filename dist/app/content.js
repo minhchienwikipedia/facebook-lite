@@ -38,15 +38,20 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts, postKeywords) {
 
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
+      // Hide all posts by default
+      item.style.display = "none";
+
+      // Only show posts that don't match removal criteria
       if (
-        removeSuggestionPosts.some(
-          (text) => item.innerHTML.indexOf(text) !== -1
-        ) &&
-        enableRemoveSuggestionPosts
+        !(
+          removeSuggestionPosts.some(
+            (text) => item.innerHTML.indexOf(text) !== -1
+          ) && enableRemoveSuggestionPosts
+        )
       ) {
-        console.log("remove suggestion posts");
-        item.remove();
-        continue;
+        item.style.display = "";
+      } else {
+        console.log("Removed post content:", item.textContent);
       }
     }
   };
