@@ -42,6 +42,11 @@ function App() {
     updateStorage(newStorage);
   };
 
+  const onChangePostKeywords = (e) => {
+    const newStorage = { ...storage, postKeywords: e.target.value };
+    updateStorage(newStorage);
+  };
+
   const onClickLink = () => {
     window.open("https://github.com/minhchienwikipedia");
   };
@@ -93,6 +98,18 @@ function App() {
               </Col>
               <Col span={12}>
                 <Input value={storage.postSize} onChange={onChangeSize} />
+              </Col>
+            </Row>
+            <Row style={{ padding: 12 }} align="middle" justify="space-between">
+              <Col span={12}>
+                <Typography.Text>Post keywords filter</Typography.Text>
+              </Col>
+              <Col span={12}>
+                <Input
+                  value={storage.postKeywords}
+                  onChange={onChangePostKeywords}
+                  placeholder="keyword1,keyword2,..."
+                />
               </Col>
             </Row>
             {!isEqual(initStorage.current, storage) ? (

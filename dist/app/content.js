@@ -5,7 +5,7 @@ function clearFB() {
   document.querySelectorAll('[role="complementary"]')[0].remove();
 }
 
-function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
+function removeAds(enableRemoveAds, enableRemoveSuggestionPosts, postKeywords) {
   let intervalId = null;
   let prevUrl = null;
 
@@ -23,13 +23,25 @@ function removeAds(enableRemoveAds, enableRemoveSuggestionPosts) {
       "x1yztbdb x1n2onr6 xh8yej3 x1ja2u2z"
     );
 
+    const removeSuggestionPosts = [
+      "Gợi ý cho bạn",
+      "Suggested for You",
+      "Send message",
+      "Follow",
+      "Suggested for you",
+      "Meta for Business",
+    ];
+
+    if (postKeywords) {
+      removeSuggestionPosts.push(...postKeywords.split(","));
+    }
+
     for (let i = 0; i < items.length; i++) {
       const item = items[i];
       if (
-        (item.innerHTML.indexOf("Gợi ý cho bạn") !== -1 ||
-          item.innerHTML.indexOf("Suggested for You") !== -1 ||
-          item.innerText.indexOf("Send message") !== -1 ||
-          item.innerHTML.indexOf("Suggested for you") !== -1) &&
+        removeSuggestionPosts.some(
+          (text) => item.innerHTML.indexOf(text) !== -1
+        ) &&
         enableRemoveSuggestionPosts
       ) {
         console.log("remove suggestion posts");
@@ -78,14 +90,15 @@ function handleResponse() {
   chrome.storage.sync.get("facebookLite").then((response) => {
     const { facebookLite } = response || {};
 
-    const { removeSuggestionPosts, postSize } = facebookLite || {};
+    const { removeSuggestionPosts, postKeywords, postSize } =
+      facebookLite || {};
     if (facebookLite.clearFB) {
       clearFB();
       if (postSize) {
         changeSize(postSize);
       }
     }
-    removeAds(facebookLite.removeAds, removeSuggestionPosts);
+    removeAds(facebookLite.removeAds, removeSuggestionPosts, postKeywords);
   });
 }
 
